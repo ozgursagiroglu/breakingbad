@@ -1,5 +1,11 @@
 import React from 'react';
-import {Image, ImageBackground, Text, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  Platform,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {useGetCharactersQuery} from '../../store/services/characterService';
 import styles from './DetailScreen.style';
 import LinearGradient from 'react-native-linear-gradient';
@@ -20,6 +26,8 @@ const DetailScreen: React.FC<Props> = ({route}) => {
     }),
   });
 
+  const backButtonTop = Platform.OS === 'ios' ? insets.top : 24;
+
   return (
     <ImageBackground
       source={{uri: character?.img}}
@@ -31,7 +39,7 @@ const DetailScreen: React.FC<Props> = ({route}) => {
         style={[
           styles.backButton,
           {
-            top: insets.top,
+            top: backButtonTop,
           },
         ]}>
         <Image
@@ -44,9 +52,11 @@ const DetailScreen: React.FC<Props> = ({route}) => {
         colors={['transparent', 'rgba(0,0,0,0.9)']}
         style={[
           styles.content,
-          {
-            paddingBottom: insets.bottom,
-          },
+          Platform.OS === 'ios'
+            ? {
+                paddingBottom: insets.bottom,
+              }
+            : {},
         ]}>
         <Text style={styles.name}>{character?.name} </Text>
 

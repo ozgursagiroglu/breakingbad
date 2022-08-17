@@ -1,6 +1,7 @@
 import {
   Dimensions,
   ImageStyle,
+  Platform,
   StyleSheet,
   TextStyle,
   ViewStyle,
@@ -26,7 +27,8 @@ export default StyleSheet.create<Style>({
     justifyContent: 'flex-end',
   },
   content: {
-    paddingVertical: 24,
+    paddingTop: 24,
+    paddingBottom: Platform.OS === 'ios' ? 24 : 96,
     paddingHorizontal: 24,
   },
   backButton: {
